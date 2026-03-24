@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ultra Hub Luis</title>
+    <style>
+        :root {
+            --fb: #1877F2;
+            --tt: #EE1D52;
+            --media: #d61f1f;
+        }
+        
+        body {
+            margin: 0;
+            background: #000;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Contenedor circular perfecto para el Galaxy Watch Ultra */
+        .hub-circle {
+            width: 95vw;
+            height: 95vw;
+            border-radius: 50%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 2px solid #222;
+        }
+
+        .app-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            transition: transform 0.1s;
+        }
+
+        .app-card:active { transform: scale(0.9); }
+
+        /* Estilos por aplicación */
+        .fb { background: var(--fb); }
+        .tt { background: var(--tt); }
+        .md { background: var(--media); grid-column: span 2; height: 60px; }
+
+        .icon { font-size: 1.2rem; margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="hub-circle">
+        <a href="facebook.html" class="app-card fb" onclick="vibrar()">
+            <span class="icon">f</span>
+            <span>FACEBOOK</span>
+        </a>
+
+        <a href="tiktok.html" class="app-card tt" onclick="vibrar()">
+            <span class="icon">♪</span>
+            <span>TIKTOK</span>
+        </a>
+
+        <a href="media.html" class="app-card md" onclick="vibrar()">
+            <span class="icon">🎬</span>
+            <span>REPRODUCTOR MEDIA</span>
+        </a>
+    </div>
+
+    <script>
+        function vibrar() {
+            if (navigator.vibrate) navigator.vibrate([30, 20, 30]);
+        }
+    </script>
+</body>
+</html>
