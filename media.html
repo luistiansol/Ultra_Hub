@@ -2,54 +2,123 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Safe Media Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>FB Ultra Pro</title>
     <style>
-        body { margin: 0; background: #000; color: #fff; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
-        .ultra-container { width: 95vw; height: 95vw; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border: 2px solid #333; }
-        .go-btn { background: #d61f1f; color: white; text-decoration: none; padding: 18px 30px; border-radius: 50px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 4px 15px rgba(214, 31, 31, 0.4); }
-        .tool-row { display: flex; gap: 8px; }
-        .tool { background: #222; border: 1px solid #444; color: white; padding: 10px; border-radius: 12px; font-size: 0.6rem; }
-        #ad-status { font-size: 0.5rem; color: #666; margin-top: 5px; }
+        :root {
+            --fb-blue: #1877F2;
+            --watch-bg: #000;
+        }
+
+        body {
+            margin: 0;
+            background-color: var(--watch-bg);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: -apple-system, system-ui, sans-serif;
+            overflow: hidden;
+            /* Soporte para notch/curvatura si el navegador lo requiere */
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        /* Contenedor circular exacto */
+        .ultra-circle {
+            width: 95vw;
+            height: 95vw;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #222;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        /* Botones estilo "Tile" de Wear OS */
+        .full-btn {
+            width: 85%;
+            margin: 8px 0;
+            padding: 16px;
+            border-radius: 50px;
+            border: none;
+            color: white;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+        }
+
+        .full-btn:active {
+            transform: scale(0.92);
+        }
+
+        /* Colores por botón */
+        .bg-feed { background-color: var(--fb-blue); }
+        .bg-reels { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .bg-login { background-color: #333; }
+
+        /* Icono de mudo discreto */
+        .mute-btn {
+            position: absolute;
+            bottom: 30px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
     </style>
 </head>
 <body>
-    <div class="ultra-container">
-        <a href="https://www.xvideos.com" class="go-btn" id="openSite">ABRIR SITIO</a>
-        <div class="tool-row">
-            <button class="tool" onclick="vibrar(); toggleFull()">PANTALLA COMPLETA</button>
-            <button class="tool" style="background:#b30000;" onclick="vibrar()">MODO MUDO</button>
-        </div>
-        <div id="ad-status">🛡️ Filtro de anuncios activo</div>
+
+    <div class="ultra-circle">
+        <button class="full-btn bg-feed" onclick="launch('https://m.facebook.com/?sk=h_chr')">
+            FEED PRO
+        </button>
+
+        <button class="full-btn bg-reels" onclick="launch('https://m.facebook.com/reels/')">
+            REELS PRO
+        </button>
+        
+        <button class="full-btn bg-login" onclick="launch('https://m.facebook.com/login/')">
+            LOGIN
+        </button>
+
+        <button class="mute-btn" onclick="toggleMute()">🔇</button>
     </div>
 
     <script>
-        function vibrar() { if (navigator.vibrate) navigator.vibrate(30); }
-        
-        function toggleFull() {
+        // Función unificada de lanzamiento con Fullscreen y Vibración
+        function launch(url) {
+            // 1. Vibrar (Feedback háptico)
+            if (navigator.vibrate) navigator.vibrate([40, 20, 40]);
+
+            // 2. Activar Pantalla Completa forzada
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
             }
+
+            // 3. Pequeña espera para que cargue el Fullscreen antes del redireccionamiento
+            setTimeout(() => {
+                window.location.href = url;
+            }, 300);
         }
 
-        // Script Bloqueador Inyectado
-        document.getElementById('openSite').addEventListener('click', function(e) {
-            vibrar();
-            // Este es un "Sandbox" que intenta prevenir popups al abrir
-            const adBlocker = setInterval(() => {
-                // Busca elementos comunes de anuncios y popups para eliminarlos
-                const selectors = [
-                    'iframe[src*="ad"]', '[id*="ad"]', '[class*="ads"]', 
-                    '.popup', '.overlay', 'div[style*="z-index: 999"]'
-                ];
-                selectors.forEach(sel => {
-                    document.querySelectorAll(sel).forEach(el => el.remove());
-                });
-            }, 500); // Se ejecuta cada medio segundo
-            
-            // Nota: El navegador de Samsung bloquea algunas inyecciones por seguridad,
-            // pero esto ayuda a mitigar las capas superiores de anuncios.
-        });
+        function toggleMute() {
+            if (navigator.vibrate) navigator.vibrate(30);
+            alert("Baja el volumen físico de tu Watch Ultra.");
+        }
     </script>
 </body>
 </html>
