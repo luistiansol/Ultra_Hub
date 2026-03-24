@@ -3,27 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>FB Ultra Focus</title>
+    <title>FB Ultra Full</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
-        body { margin: 0; background: #000; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .watch-ui { width: 90vw; height: 90vw; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; border: 1px solid #1877F2; }
-        .btn { width: 80%; padding: 12px; border-radius: 20px; text-decoration: none; color: white; font-weight: bold; text-align: center; font-size: 0.8rem; border: none; cursor: pointer; }
-        .bg-fb { background: #1877F2; }
-        .bg-reels { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
-        .mute-btn { background: #333; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 5px; }
+        :root { --fb: #1877F2; --white: #fff; --dark: #121212; }
+        body { margin: 0; background: var(--dark); color: var(--white); font-family: -apple-system, system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        
+        /* Contenedor circular exacto para el Watch Ultra */
+        .ultra-ui { width: 95vw; height: 95vw; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid #333; gap: 8px; padding: 20px; box-sizing: border-box; }
+        
+        .btn { width: 90%; text-decoration: none; border: none; padding: 15px; border-radius: 30px; color: var(--white); font-weight: bold; text-align: center; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.1s; }
+        .btn:active { transform: scale(0.92); }
+        
+        .bg-fb-all { background: var(--fb); }
+        .bg-reels-full { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .mute-btn { background: #333; color: #ccc; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border: none; margin-top: 5px; }
+        
+        .icon { font-size: 1.1rem; }
     </style>
 </head>
 <body>
-    <div class="watch-ui">
-        <a href="https://m.facebook.com/?sk=h_chr" class="btn bg-fb" onclick="vibrar()">NOTICIAS (FEED)</a>
-        <a href="https://m.facebook.com/reels/" class="btn bg-reels" onclick="vibrar()">REELS</a>
+    <div class="ultra-ui">
+        <a href="https://m.facebook.com" class="btn bg-fb-all" onclick="vibrar()">
+            <span class="icon">f</span>
+            <span>FACEBOOK COMPLETO</span>
+        </a>
+        
+        <button id="fullReels" class="btn bg-reels-full" onclick="fullReelsMode()">
+            <span class="icon">▶️</span>
+            <span>REELS FULL SCREEN</span>
+        </button>
+        
         <button class="mute-btn" onclick="toggleMute()">🔇</button>
     </div>
     <script>
-        function vibrar() { if (navigator.vibrate) navigator.vibrate(50); }
+        function vibrar() { if (navigator.vibrate) navigator.vibrate(40); }
+        
+        function fullReelsMode() {
+            vibrar();
+            // Truco de Pantalla Completa (Modo Media)
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            }
+            // Espera un momento a que active el fullscreen antes de saltar
+            setTimeout(() => {
+                window.location.href = "https://m.facebook.com/reels/";
+            }, 300);
+        }
+        
         function toggleMute() {
             vibrar();
-            alert("Recordatorio: Baja el volumen multimedia con el bisel del reloj.");
+            alert("Baja el volumen físico de tu Watch Ultra para silencio total.");
         }
     </script>
 </body>
