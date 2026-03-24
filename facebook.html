@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FB Ultra Focus</title>
+    <style>
+        body { margin: 0; background: #000; color: white; font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .watch-ui { width: 90vw; height: 90vw; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px; border: 1px solid #1877F2; }
+        .btn { width: 80%; padding: 12px; border-radius: 20px; text-decoration: none; color: white; font-weight: bold; text-align: center; font-size: 0.8rem; border: none; cursor: pointer; }
+        .bg-fb { background: #1877F2; }
+        .bg-reels { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+        .mute-btn { background: #333; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="watch-ui">
+        <a href="https://m.facebook.com/?sk=h_chr" class="btn bg-fb" onclick="vibrar()">NOTICIAS (FEED)</a>
+        <a href="https://m.facebook.com/reels/" class="btn bg-reels" onclick="vibrar()">REELS</a>
+        <button class="mute-btn" onclick="toggleMute()">🔇</button>
+    </div>
+    <script>
+        function vibrar() { if (navigator.vibrate) navigator.vibrate(50); }
+        function toggleMute() {
+            vibrar();
+            alert("Recordatorio: Baja el volumen multimedia con el bisel del reloj.");
+        }
+    </script>
+</body>
+</html>
