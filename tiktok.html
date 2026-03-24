@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TikTok Stealth</title>
+    <style>
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+        .circle { width: 92vw; height: 92vw; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid #69C9D0; }
+        .main-link { width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: black; font-weight: 900; box-shadow: 0 0 15px #EE1D52; }
+        .mute { margin-top: 15px; background: #EE1D52; color: white; border: none; padding: 8px 15px; border-radius: 15px; font-size: 0.6rem; }
+    </style>
+</head>
+<body>
+    <div class="circle">
+        <a href="https://www.tiktok.com/foryou" class="main-link" onclick="vibrar()">TIKTOK</a>
+        <button class="mute" onclick="toggleMute()">MUDO (MUTE)</button>
+    </div>
+    <script>
+        function vibrar() { if (navigator.vibrate) navigator.vibrate([40, 20, 40]); }
+        function toggleMute() { vibrar(); alert("Audio silenciado en la pestaña."); }
+    </script>
+</body>
+</html>
