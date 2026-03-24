@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Media Viewer</title>
+    <style>
+        body { margin: 0; background: #050505; color: #444; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: sans-serif; }
+        .ultra-container { width: 95vw; height: 95vw; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+        .go-btn { background: #d61f1f; color: white; text-decoration: none; padding: 15px 25px; border-radius: 30px; font-weight: bold; font-size: 0.7rem; }
+        .tool-row { display: flex; gap: 10px; }
+        .tool { background: #222; border: none; color: white; padding: 10px; border-radius: 10px; font-size: 0.6rem; }
+    </style>
+</head>
+<body>
+    <div class="ultra-container">
+        <a href="https://www.xvideos.com" class="go-btn" onclick="vibrar()">ABRIR SITIO</a>
+        <div class="tool-row">
+            <button class="tool" onclick="vibrar(); document.documentElement.requestFullscreen();">PANTALLA COMPLETA</button>
+            <button class="tool" style="background:#b30000;" onclick="vibrar()">MUDO</button>
+        </div>
+    </div>
+    <script>
+        function vibrar() { if (navigator.vibrate) navigator.vibrate(30); }
+    </script>
+</body>
+</html>
