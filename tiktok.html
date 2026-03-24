@@ -3,22 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>TikTok Stealth</title>
+    <title>TikTok Ultra Fix</title>
     <style>
-        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
-        .circle { width: 92vw; height: 92vw; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid #69C9D0; }
-        .main-link { width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: black; font-weight: 900; box-shadow: 0 0 15px #EE1D52; }
-        .mute { margin-top: 15px; background: #EE1D52; color: white; border: none; padding: 8px 15px; border-radius: 15px; font-size: 0.6rem; }
+        body { margin: 0; background: #000; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; font-family: sans-serif; }
+        .circle { width: 95vw; height: 95vw; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 2px solid #69C9D0; position: relative; }
+        /* Botón estilo original (el que te gustó) */
+        .main-link { 
+            width: 130px; height: 130px; 
+            background: linear-gradient(45deg, #ee1d52, #69c9d0); 
+            border-radius: 50%; border: 4px solid white;
+            display: flex; align-items: center; justify-content: center; 
+            text-decoration: none; color: white; font-weight: 900; 
+            box-shadow: 0 0 20px rgba(255,255,255,0.3);
+            font-size: 1.2rem;
+        }
+        .mute-btn { margin-top: 15px; background: #333; color: white; border: none; padding: 10px 20px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; cursor: pointer; }
     </style>
 </head>
 <body>
     <div class="circle">
-        <a href="https://www.tiktok.com/foryou" class="main-link" onclick="vibrar()">TIKTOK</a>
-        <button class="mute" onclick="toggleMute()">MUDO (MUTE)</button>
+        <a href="https://www.tiktok.com/explore" class="main-link" id="launch">TIKTOK</a>
+        <button class="mute-btn" onclick="toggleMute()">MUDO / SILENCIO</button>
     </div>
     <script>
-        function vibrar() { if (navigator.vibrate) navigator.vibrate([40, 20, 40]); }
-        function toggleMute() { vibrar(); alert("Audio silenciado en la pestaña."); }
+        const btn = document.getElementById('launch');
+        btn.addEventListener('click', (e) => {
+            if (navigator.vibrate) navigator.vibrate([50, 30, 50]);
+        });
+
+        function toggleMute() {
+            if (navigator.vibrate) navigator.vibrate(40);
+            alert("Baja el volumen físico de tu Watch Ultra para silencio total.");
+        }
     </script>
 </body>
 </html>
